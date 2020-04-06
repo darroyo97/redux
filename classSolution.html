@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.0.5/redux.min.js"></script>
+    <script>
+        //Counter
+        //Initial COunter:0
+        // Add -action creator
+        //increment counter inside of  global state by 1,2,3
+        //Subtract - action creator
+        //decrement counter inside of global state by 3,2,1,0
+
+        //action creator - event
+
+        function increment() {
+
+
+            return {
+                type: "increment"
+            }
+        }
+
+
+        function decrement() {
+            return {
+                type: "Decrement"
+            }
+        }
+
+        let initialState = {
+            count: 0
+        }
+
+        function reducer(state, action) {
+            if (state === undefined) {
+                state = initialState
+            }
+            if (action.type === "Increment") {
+                return {
+                    ...state,
+                    count: state.count + 1
+                }
+            }
+        }
+
+        let store = Redux.createStore(reducer);
+
+    </script>
+</body>
+
+</html>
