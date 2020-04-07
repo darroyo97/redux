@@ -1,50 +1,65 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { createStore } from 'redux'
-import { Provider, connect } from 'react-redux'
-
-//Create counter component 
-
-
+import ReactDOM from "react-dom";
+import { createStore } from "redux";
+import { Provider, connect } from "react-redux";
+// import App from "./App";
+import React, { Component } from "react";
+//Goal is to increment the global state
 class Counter extends Component {
   constructor(props) {
-    super(props)
-
+    super(props);
     this.state = {
-      title: "Hola"
-    }
+      title: "hello"
+    };
   }
   render() {
     return (
       <>
-        {/* Goal is to increment the global state  */}
         <h1>{this.state.title}</h1>
         <span>{this.props.count}</span>
-
-        <button onClick={}>Increase</button>
+        <button onClick={this.props.onIncreaseClick}>Increase</button>
       </>
-    )
+    );
   }
-
 }
-
-// Action Creators 
-// Reducers (state, action) 
-// create store (reducer)
-// dispatch 
-// mapStateToProps 
-// mapDispatchToProps 
-//connect component to connect mapStateToProps
-// and mapDispatchToProps
-//wrap our application inside Provider
-//pass to the provider the store
-
-
-
+//Maps global state to property in component
+let mapStateToProps = state => {
+  return {
+    count: state.count
+  };
+};
+//Allows the store to invoke the function. Reason for syntax.
+let mapDispatchToProps = dispatch => {
+  return {
+    onIncreaseClick: () => dispatch(increaseAction())
+  };
+};
+const App = connect(mapStateToProps, mapDispatchToProps)(Counter);
+let increaseAction = () => {
+  return {
+    type: "Increase"
+  };
+};
+let initialState = {
+  count: 0
+};
+let counterReducer = (state, action) => {
+  if (state === undefined) {
+    state = initialState;
+  }
+  if (action.type === "Increase") {
+    return {
+      ...state,
+      count: state.count + 1
+    };
+  } else {
+    return state;
+  }
+};
+let store = createStore(counterReducer);
+// export default Counter;
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </Provider>,
+  document.getElementById("root")
 );
-
