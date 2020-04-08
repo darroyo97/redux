@@ -58,9 +58,10 @@
             }
             else if (action.type === 'REMOVE') {
                 //update the state
+                //[{id:1},{id:2},{id:3}]
                 return {
                     ...state,
-                    persons: state.persons.filter()
+                    persons: state.persons.filter(p => p.id != action.personId)
                 }
 
             }
