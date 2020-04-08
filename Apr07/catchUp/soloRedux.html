@@ -25,14 +25,40 @@
                 }
 
             }
-            function removePerson(id) {
 
+        }
+        function removePerson(id) {
+
+            return {
+                type: 'REMOVE',
+                personId: id
+            }
+        }
+
+        let initialState = {
+            persons: [],
+            count: 0,
+            date: "01-01-2020"
+        }
+        function reducer(state, action) {
+            if (state === undefined) {
+                state = initialState
+            }
+            if (action.type === 'ADD') {
+                //update the state
+                let newPerson = {
+                    id: action.personData.id,
+                    name: action.personData.name,
+                    age: action.personData.age
+                }
                 return {
-                    type: 'REMOVE',
-                    personId: id
+                    ...state,
+                    persons: state.persons.concat(newPerson)
                 }
             }
-
+            else if (action.type === 'REMOVE') {
+                //update the state
+            }
         }
 
 
