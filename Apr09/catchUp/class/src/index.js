@@ -40,6 +40,11 @@ let increaseAction = () => {
     type: "Increase"
   };
 };
+let decreaseAction = () => {
+  return {
+    type: "Decrease"
+  }
+}
 let initialState = {
   count: 0
 };
@@ -60,6 +65,11 @@ let counterReducer = (state, action) => {
       return {
         ...state,
         count: state.count + 1
+      }
+    case 'Decrease':
+      return {
+        ...state,
+        count: state.count - 1
       }
     default:
       return state;
