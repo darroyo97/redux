@@ -47,13 +47,22 @@ let counterReducer = (state, action) => {
   if (state === undefined) {
     state = initialState;
   }
-  if (action.type === "Increase") {
-    return {
-      ...state,
-      count: state.count + 1
-    };
-  } else {
-    return state;
+  // if (action.type === "Increase") {
+  //   return {
+  //     ...state,
+  //     count: state.count + 1
+  //   };
+  // } else {
+  //   return state;
+  // }
+  switch (action.type) {
+    case 'Increase':
+      return {
+        ...state,
+        count: state.count + 1
+      }
+    default:
+      return state;
   }
 };
 let store = createStore(counterReducer);
